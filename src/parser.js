@@ -222,6 +222,9 @@ module.exports = {
     }
   },
 
+  //
+  //
+
   parseMember: function (member, section, memberdef) {
     log.verbose('Processing member ' + member.kind + ' ' + member.name);
     member.section = section;
@@ -236,7 +239,7 @@ module.exports = {
         m = m.concat(['{', member.kind, '} ']);
 
       case 'function':
-        m = m.concat(memberdef.$.prot, ' '); // public, private, ...
+        //m = m.concat(memberdef.$.prot, ' '); // public, private, ...
         if (memberdef.templateparamlist) {
           m.push('template <');
           if (memberdef.templateparamlist.length > 0 && memberdef.templateparamlist.param) {
@@ -248,7 +251,8 @@ module.exports = {
           }
           m.push('>  \n');
         }
-        m = m.concat(memberdef.$.inline == 'yes' ? ['inline', ' '] : []);
+
+        //m = m.concat(memberdef.$.inline == 'yes' ? ['inline', ' '] : []);
         m = m.concat(memberdef.$.static == 'yes' ? ['static', ' '] : []);
         m = m.concat(memberdef.$.virt == 'virtual' ? ['virtual', ' '] : []);
         m = m.concat(toMarkdown(memberdef.type), ' ');
@@ -272,7 +276,7 @@ module.exports = {
         break;
 
       case 'variable':
-        m = m.concat(memberdef.$.prot, ' '); // public, private, ...
+        //m = m.concat(memberdef.$.prot, ' '); // public, private, ...
         m = m.concat(memberdef.$.static == 'yes' ? ['static', ' '] : []);
         m = m.concat(memberdef.$.mutable == 'yes' ? ['mutable', ' '] : []);
         m = m.concat(toMarkdown(memberdef.type), ' ');
@@ -301,6 +305,10 @@ module.exports = {
         }
         // m.push(member.kind + ' ' + member.name);
         m = m.concat([member.kind, ' ', markdown.refLink(member.name, member.refid)]);
+        break;
+
+    case 'typedef':
+        m = m.concat(['using ', markdown.refLink(member.name, member.refid)]);
         break;
 
       default:
