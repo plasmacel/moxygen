@@ -238,7 +238,7 @@ module.exports = {
       case 'function':
         m = m.concat(memberdef.$.prot, ' '); // public, private, ...
         if (memberdef.templateparamlist) {
-          m.push('template<');
+          m.push('template <');
           if (memberdef.templateparamlist.length > 0 && memberdef.templateparamlist.param) {
             memberdef.templateparamlist[0].param.forEach(function (param, argn) {
               m = m.concat(argn == 0 ? [] : ',');
